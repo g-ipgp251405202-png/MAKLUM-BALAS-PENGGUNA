@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maklum Balas Laman - Kafe Dorayaki Doraemon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka:wght@600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Latar Belakang Tema Makanan Doraemon (Krim Susu, Kuning Madu & Corak Dorayaki) */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fef3c7;
+            background-image: 
+        /* Latar Belakang Tema Makanan Doraemon (Gradien Krim Susu Hangat Tanpa Polkadot) */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 45%, #fde68a 100%);
+            color: #451a03;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .font-cartoon {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .font-comic-sfx {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.06em;
+        }
+
+        /* Bingkai Kad Gaya Kafe Dorayaki (Coklat Panggang + Bayang Keras Kartun) */
+        .dorayaki-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
+            border: 3.5px solid #451a03;
+            box-shadow: 6px 6px 0px #451a03;
+            border-radius: 24px;
+        }
+
+        .dorayaki-subcard {
+            background: #fef9c3;
+            border: 3px solid #78350f;
+            box-shadow: 4px 4px 0px #78350f;
+            border-radius: 18px;
+        }
+
+        .dorayaki-btn {
+            border: 3px solid #451a03;
+            box-shadow: 0 4px 0 #451a03;
+            transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s;
+        }
+        .dorayaki-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #451a03;
+        }
+
+        .dorayaki-input {
+            background-color: #ffffff;
+            border: 3px solid #78350f;
+            border-radius: 14px;
+            color: #451a03;
+            transition: box-shadow 0.15s, border-color 0.15s;
+        }
+        .dorayaki-input:focus {
+            outline: none;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+        }
+
+        /* Animasi Makanan & Doraemon Ceria */
+        @keyframes yummyBounce {
+            0%, 100% { transform: translateY(0px) rotate(-3deg); }
+            50% { transform: translateY(-7px) rotate(3deg); }
+        }
+        .yummy-float {
+            animation: yummyBounce 2.8s ease-in-out infinite;
+        }
+
+        @keyframes snackSpin {
+            0%, 100% { transform: rotate(-6deg) scale(1); }
+            50% { transform: rotate(6deg) scale(1.06); }
+        }
+        .snack-wiggle {
+            animation: snackSpin 3.2s ease-in-out infinite;
+        }
+
+        /* Bintang Penilaian Interaktif */
+        .star-btn {
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s;
+        }
+        .star-btn:hover {
+            transform: scale(1.22) rotate(6deg);
+        }
+        .star-btn.active {
+            transform: scale(1.12);
+            filter: drop-shadow(0 3px 0 #78350f);
+        }
+
+        /* Animasi Hadiah Dorayaki Muncul */
+        @keyframes giftPopIn {
+            0% { transform: scale(0.4) rotate(-10deg); opacity: 0; }
+            65% { transform: scale(1.06) rotate(3deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .gift-modal-pop {
+            animation: giftPopIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes dorayakiGlow {
+            0%, 100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 6px 12px rgba(217, 119, 6, 0.35)); }
+            50% { transform: translateY(-8px) scale(1.05); filter: drop-shadow(0 12px 20px rgba(245, 158, 11, 0.6)); }
+        }
+        .dorayaki-hero-anim {
+            animation: dorayakiGlow 2.4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="p-3 sm:p-5 min-h-screen relative">
+
+    <!-- Hiasan Taburan Macam-Macam Makanan Kegemaran Doraemon di Latar Belakang -->
+    <div class="pointer-events-none fixed inset-0 overflow-hidden z-0 select-none">
+        <!-- 1. Dorayaki Klasik (Kiri Atas) -->
+        <svg class="snack-wiggle absolute top-4 left-3 w-20 h-20 opacity-55" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="60" rx="38" ry="18" fill="#b45309" stroke="#451a03" stroke-width="3"/>
+            <ellipse cx="50" cy="52" rx="35" ry="12" fill="#451a03"/>
+            <ellipse cx="50" cy="43" rx="38" ry="18" fill="#d97706" stroke="#451a03" stroke-width="3"/>
+            <ellipse cx="42" cy="38" rx="16" ry="5" fill="#fef08a" opacity="0.55"/>
+        </svg>
+
+        <!-- 2. Onigiri / Nasi Kepal (Kanan Atas) -->
+        <svg class="yummy-float absolute top-6 right-6 w-16 h-16 opacity-50" style="animation-delay: 0.4s;" viewBox="0 0 100 100">
+            <path d="M50 14 C62 14 86 64 82 78 C78 88 22 88 18 78 C14 64 38 14 50 14 Z" fill="#ffffff" stroke="#1e293b" stroke-width="3.5"/>
+            <rect x="36" y="60" width="28" height="24" rx="4" fill="#1e293b"/>
+            <circle cx="42" cy="46" r="2.5" fill="#1e293b"/>
+            <circle cx="58" cy="46" r="2.5" fill="#1e293b"/>
+            <path d="M46 50 Q50 54 54 50" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+
+        <!-- 3. Dango 3 Warna (Kiri Tengah) -->
+        <svg class="snack-wiggle absolute top-[38%] left-2 w-16 h-24 opacity-50" style="animation-delay: 0.9s;" viewBox="0 0 80 120">
+            <line x1="40" y1="12" x2="40" y2="112" stroke="#92400e" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="40" cy="28" r="14" fill="#f472b6" stroke="#451a03" stroke-width="3"/>
+            <circle cx="40" cy="54" r="14" fill="#ffffff" stroke="#451a03" stroke-width="3"/>
+            <circle cx="40" cy="80" r="14" fill="#4ade80" stroke="#451a03" stroke-width="3"/>
+        </svg>
+
+        <!-- 4. Puding Karamel Comel (Kanan Tengah) -->
+        <svg class="yummy-float absolute top-[42%] right-3 w-20 h-20 opacity-50" style="animation-delay: 1.4s;" viewBox="0 0 100 100">
+            <path d="M24 78 L32 34 Q50 26 68 34 L76 78 Z" fill="#facc15" stroke="#451a03" stroke-width="3"/>
+            <path d="M32 34 Q50 26 68 34 L70 46 Q60 52 50 45 Q40 52 30 46 Z" fill="#78350f"/>
+            <ellipse cx="50" cy="80" rx="36" ry="8" fill="#ffffff" stroke="#451a03" stroke-width="3"/>
+        </svg>
+
+        <!-- 5. Potongan Tembikai Segar (Kiri Bawah) -->
+        <svg class="yummy-float absolute bottom-10 left-5 w-20 h-20 opacity-50" style="animation-delay: 0.7s;" viewBox="0 0 100 100">
+            <path d="M14 42 A38 38 0 0 0 86 42 Z" fill="#16a34a" stroke="#1e293b" stroke-width="3"/>
+            <path d="M20 42 A31 31 0 0 0 80 42 Z" fill="#f43f5e"/>
+            <circle cx="40" cy="52" r="2.2" fill="#1e293b"/>
+            <circle cx="50" cy="58" r="2.2" fill="#1e293b"/>
+            <circle cx="60" cy="52" r="2.2" fill="#1e293b"/>
+        </svg>
+
+        <!-- 6. Roti Penghafal / Memory Bread (Kanan Bawah) -->
+        <svg class="snack-wiggle absolute bottom-6 right-5 w-20 h-20 opacity-55" style="animation-delay: 1.2s;" viewBox="0 0 100 100">
+            <path d="M22 38 C16 26 28 18 50 18 C72 18 84 26 78 38 L76 82 C76 86 72 88 66 88 L34 88 C28 88 24 86 24 82 Z" fill="#d97706" stroke="#451a03" stroke-width="3"/>
+            <path d="M28 38 C24 30 32 24 50 24 C68 24 76 30 72 38 L70 80 L30 80 Z" fill="#fef3c7"/>
+            <text x="50" y="58" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="14" fill="#92400e">A+</text>
+        </svg>
+
+        <!-- 7. Kek Cawan / Cupcake (Tengah Bawah) -->
+        <svg class="snack-wiggle absolute bottom-3 left-[45%] w-16 h-16 opacity-40" style="animation-delay: 1.8s;" viewBox="0 0 100 100">
+            <polygon points="28,54 72,54 64,86 36,86" fill="#38bdf8" stroke="#1e293b" stroke-width="3"/>
+            <path d="M24 54 C20 36 42 26 50 26 C58 26 80 36 76 54 Z" fill="#fda4af" stroke="#1e293b" stroke-width="3"/>
+            <circle cx="50" cy="20" r="7" fill="#ef4444" stroke="#1e293b" stroke-width="2.5"/>
+        </svg>
+    </div>
+
+    <!-- Bekas Utama Responsif -->
+    <div class="relative z-10 max-w-5xl mx-auto">
+
+        <!-- HEADER KAFE DORAYAKI DORAEMON + PENUKAR PAPARAN -->
+        <header class="dorayaki-card bg-gradient-to-r from-amber-200 via-yellow-100 to-sky-100 p-4 sm:p-6 mb-6 relative overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+                
+                <!-- Kiri: Ikon Doraemon Sedang Makan Dorayaki & Tajuk -->
+                <div class="flex items-center gap-4 text-center md:text-left">
+                    <!-- Ikon Doraemon & Dorayaki SVG -->
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 yummy-float">
+                        <svg viewBox="0 0 140 135" class="w-full h-full drop-shadow-md">
+                            <!-- Kepala Doraemon -->
+                            <circle cx="65" cy="64" r="50" fill="#0284c7" stroke="#0f172a" stroke-width="3.5"/>
+                            <ellipse cx="65" cy="71" rx="41" ry="36" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+                            <!-- Mata Gembira Melengkung (^ ^) Menikmati Makanan -->
+                            <path d="M 43,46 Q 53,34 62,46" fill="none" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round"/>
+                            <path d="M 68,46 Q 77,34 87,46" fill="none" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round"/>
+                            <!-- Hidung Merah -->
+                            <circle cx="65" cy="56" r="8" fill="#ef4444" stroke="#0f172a" stroke-width="3"/>
+                            <circle cx="62.5" cy="53.5" r="2.2" fill="#ffffff"/>
+                            <!-- Pipi Kemerahan Lazat -->
+                            <ellipse cx="38" cy="68" rx="7" ry="4" fill="#fda4af" opacity="0.85"/>
+                            <ellipse cx="92" cy="68" rx="7" ry="4" fill="#fda4af" opacity="0.85"/>
+                            <!-- Mulut Mengunyah Ceria -->
+                            <line x1="65" y1="64" x2="65" y2="76" stroke="#0f172a" stroke-width="2.5"/>
+                            <path d="M 44,75 Q 65,98 86,75 Z" fill="#dc2626" stroke="#0f172a" stroke-width="3"/>
+                            <path d="M 53,86 Q 65,79 77,86 Q 65,95 53,86 Z" fill="#fb7185"/>
+                            <!-- Misai -->
+                            <line x1="28" y1="58" x2="46" y2="62" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="26" y1="66" x2="45" y2="66" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="102" y1="58" x2="84" y2="62" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+                            <line x1="104" y1="66" x2="85" y2="66" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Kolar & Loceng -->
+                            <rect x="34" y="106" width="62" height="9" rx="4.5" fill="#ef4444" stroke="#0f172a" stroke-width="3"/>
+                            <circle cx="65" cy="112" r="8" fill="#facc15" stroke="#0f172a" stroke-width="2.5"/>
+                            <!-- Kuih Dorayaki Lazat di Tangan Kanan -->
+                            <g transform="translate(82, 74) rotate(-14)">
+                                <ellipse cx="26" cy="28" rx="24" ry="12" fill="#92400e" stroke="#451a03" stroke-width="3"/>
+                                <ellipse cx="26" cy="22" rx="22" ry="8" fill="#451a03"/>
+                                <ellipse cx="26" cy="16" rx="24" ry="12" fill="#d97706" stroke="#451a03" stroke-width="3"/>
+                                <ellipse cx="21" cy="12" rx="10" ry="3.5" fill="#fef08a" opacity="0.65"/>
+                            </g>
+                            <!-- Tangan Putih Doraemon Memegang Dorayaki -->
+                            <circle cx="96" cy="102" r="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="inline-flex items-center gap-1.5 mb-1">
+                            <span class="bg-amber-500 text-white border-2 border-amber-950 px-2.5 py-0.5 rounded-full font-comic-sfx text-sm tracking-wider shadow-sm">
+                                🥞 KAFE DORAYAKI DORAEMON!
+                            </span>
+                        </div>
+                        <h1 class="font-cartoon text-2xl sm:text-3xl text-amber-950 leading-tight">
+                            Maklum Balas Laman Pembelajaran
+                        </h1>
+                        <p class="text-xs sm:text-sm font-extrabold text-amber-800">
+                            Kongsikan pendapat, bintang & cadangan anda untuk menjadikan Google Site ini lebih manis dan menarik!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kanan: Butang Tukar Tab (Borang Maklum Balas vs Rekod Guru) -->
+                <div class="flex items-center gap-2 bg-amber-950/10 p-1.5 rounded-2xl border-2 border-amber-900/30">
+                    <button id="tabFeedbackFormBtn" class="dorayaki-btn bg-sky-500 text-white font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5">
+                        <span>🥞</span>
+                        <span>Beri Maklum Balas</span>
+                    </button>
+                    <button id="tabAdminDataBtn" class="bg-white hover:bg-amber-50 text-amber-950 border-2 border-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors">
+                        <span>📋</span>
+                        <span>Rekod Ulasan</span>
+                        <span id="totalFeedbackBadge" class="bg-amber-400 text-amber-950 border border-amber-950 font-black text-[11px] px-2 py-0.2 rounded-full">0</span>
+                    </button>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- NOTIFIKASI MESEJ CUSTOM (MENGGANTIKAN ALERT) -->
+        <div id="statusToast" class="hidden mb-5 dorayaki-card p-4 flex items-center justify-between gap-3 bg-white">
+            <div class="flex items-center gap-3">
+                <span id="toastIcon" class="text-2xl">🥞</span>
+                <div>
+                    <h4 id="toastTitle" class="font-cartoon text-base text-amber-950"></h4>
+                    <p id="toastMessage" class="text-xs sm:text-sm font-bold text-amber-800"></p>
+                </div>
+            </div>
+            <button id="closeToastBtn" class="text-amber-700 hover:text-amber-950 font-black px-2 py-1 cursor-pointer">✖</button>
+        </div>
+
+        <!-- =================================================================== -->
+        <!-- BAHAGIAN 1: BORANG MAKLUM BALAS PENGGUNA / MURID                    -->
+        <!-- =================================================================== -->
+        <section id="feedbackFormSection">
+            <form id="feedbackForm" class="dorayaki-card p-5 sm:p-7 space-y-6">
+                
+                <!-- Bahagian Atas Borang: Nama & Penilaian Bintang Per 5 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
+                    
+                    <!-- Nama Pengunjung / Murid -->
+                    <div class="md:col-span-6">
+                        <label for="visitorName" class="block font-cartoon text-base sm:text-lg text-amber-950 mb-1.5">
+                            1. Nama Anda <span class="text-red-600">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="visitorName" 
+                            required
+                            placeholder="Contoh: Nur Aisyah / Cikgu Amir"
+                            class="dorayaki-input w-full px-4 py-3 text-sm sm:text-base font-bold placeholder-amber-900/40"
+                        >
+                        <p class="text-[11px] font-bold text-amber-800 mt-1">
+                            🍬 Masukkan nama penuh atau nama panggilan anda.
+                        </p>
+                    </div>
+
+                    <!-- Penilaian Bintang (Rate Bintang Berapa Per 5) -->
+                    <div class="md:col-span-6">
+                        <label class="block font-cartoon text-base sm:text-lg text-amber-950 mb-1.5">
+                            2. Penilaian Bintang (Per 5) <span class="text-red-600">*</span>
+                        </label>
+                        <div class="dorayaki-subcard p-3.5 flex flex-col items-center justify-center bg-amber-50">
+                            <div id="starRatingContainer" class="flex items-center gap-2 sm:gap-3" role="radiogroup" aria-label="Penilaian Bintang">
+                                <button type="button" data-star="1" class="star-btn text-3xl sm:text-4xl cursor-pointer focus:outline-none" title="1 Bintang">⭐</button>
+                                <button type="button" data-star="2" class="star-btn text-3xl sm:text-4xl cursor-pointer focus:outline-none" title="2 Bintang">⭐</button>
+                                <button type="button" data-star="3" class="star-btn text-3xl sm:text-4xl cursor-pointer focus:outline-none" title="3 Bintang">⭐</button>
+                                <button type="button" data-star="4" class="star-btn text-3xl sm:text-4xl cursor-pointer focus:outline-none" title="4 Bintang">⭐</button>
+                                <button type="button" data-star="5" class="star-btn text-3xl sm:text-4xl cursor-pointer focus:outline-none" title="5 Bintang">⭐</button>
+                            </div>
+                            <div class="mt-2 flex items-center gap-2">
+                                <span id="starScoreLabel" class="bg-amber-400 text-amber-950 border-2 border-amber-950 font-cartoon text-xs sm:text-sm px-3 py-0.5 rounded-full">
+                                    5 / 5 Bintang — Sangat Lazat & Menarik! 🥞
+                                </span>
+                            </div>
+                            <input type="hidden" id="starRatingValue" value="5">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bahagian 3: Ulasan -->
+                <div>
+                    <label for="feedbackComment" class="block font-cartoon text-base sm:text-lg text-amber-950 mb-1.5">
+                        3. Ulasan Anda Tentang Google Site Ini <span class="text-red-600">*</span>
+                    </label>
+                    <textarea 
+                        id="feedbackComment" 
+                        rows="3" 
+                        required
+                        placeholder="Contoh: Laman ini sangat seronok, mudah difahami dan animasi Doraemon membantu saya belajar dengan gembira!"
+                        class="dorayaki-input w-full px-4 py-3 text-sm sm:text-base font-bold placeholder-amber-900/40 resize-y"
+                    ></textarea>
+                </div>
+
+                <!-- Bahagian 4: Cadangan Penambahbaikan (Jika Ada) -->
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-1 mb-1.5">
+                        <label for="feedbackSuggestion" class="font-cartoon text-base sm:text-lg text-amber-950">
+                            4. Cadangan Penambahbaikan <span class="text-xs font-extrabold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full border border-sky-400">(Jika Ada / Pilihan)</span>
+                        </label>
+                    </div>
+                    <textarea 
+                        id="feedbackSuggestion" 
+                        rows="2" 
+                        placeholder="Contoh: Boleh tambah lebih banyak permainan kuiz mini atau video pendek pada masa akan datang."
+                        class="dorayaki-input w-full px-4 py-3 text-sm sm:text-base font-bold placeholder-amber-900/40 resize-y"
+                    ></textarea>
+                </div>
+
+                <!-- Butang Hantar Maklum Balas -->
+                <div class="pt-3 border-t-2 border-amber-900/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-2 text-xs sm:text-sm font-extrabold text-amber-900">
+                        <span class="text-xl">🍰</span>
+                        <span>Setiap maklum balas anda amat dihargai oleh Doraemon!</span>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        id="submitFeedbackBtn"
+                        class="dorayaki-btn w-full sm:w-auto bg-gradient-to-r from-amber-400 to-yellow-300 hover:from-amber-300 hover:to-yellow-200 text-amber-950 font-cartoon text-base sm:text-lg px-8 py-3 rounded-2xl cursor-pointer flex items-center justify-center gap-2"
+                    >
+                        <span>🥞 Hantar Maklum Balas!</span>
+                    </button>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- BAHAGIAN 2: PANEL REKOD MAKLUM BALAS UNTUK PENILAIAN                -->
+        <!-- =================================================================== -->
+        <section id="adminDataSection" class="hidden space-y-5">
+            
+            <!-- Kad Statistik Purata Bintang & Kawalan Eksport -->
+            <div class="dorayaki-card p-5">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                    <div>
+                        <span class="bg-sky-500 text-white border-2 border-amber-950 px-2.5 py-0.5 rounded font-cartoon text-xs">
+                            📋 REKOD PANGKALAN DATA MAKLUM BALAS
+                        </span>
+                        <h2 class="font-cartoon text-xl sm:text-2xl text-amber-950 mt-1.5">
+                            Senarai Penilaian & Cadangan Pengunjung
+                        </h2>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                        <button id="openSheetConfigBtn" class="dorayaki-btn bg-sky-400 hover:bg-sky-300 text-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5">
+                            <span>🔗 Pautan Google Sheets</span>
+                        </button>
+                        <button id="exportCsvBtn" class="dorayaki-btn bg-emerald-400 hover:bg-emerald-300 text-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5">
+                            <span>📥 Muat Turun Excel (CSV)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Panel Pautan Google Apps Script untuk Google Sites -->
+                <div id="sheetConfigPanel" class="hidden mb-4 bg-amber-50 p-4 rounded-2xl border-2 border-amber-900">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <h3 class="font-cartoon text-base text-amber-950">🔗 Sambungan Google Sheets (Untuk Google Sites)</h3>
+                        <button id="closeSheetConfigBtn" class="text-amber-800 hover:text-amber-950 font-bold text-sm cursor-pointer">Tutup ✖</button>
+                    </div>
+                    <p class="text-xs font-bold text-amber-900 mb-2.5">
+                        Masukkan URL Web App <strong>Google Apps Script</strong> anda di bawah supaya semua maklum balas dari Google Sites terus disimpan ke dalam Google Sheets anda:
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="url" id="appsScriptUrlInput" placeholder="https://script.google.com/macros/s/XXXX/exec" class="dorayaki-input flex-1 px-3 py-2 text-xs sm:text-sm">
+                        <button id="saveAppsScriptBtn" class="dorayaki-btn bg-amber-400 hover:bg-amber-300 text-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer">
+                            💾 Simpan Pautan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ringkasan Statistik & Penapis Bintang -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-amber-100/80 p-3.5 rounded-2xl border-2 border-amber-900/30">
+                    <div class="bg-white px-3.5 py-2 rounded-xl border-2 border-amber-900/20 flex items-center justify-between">
+                        <span class="text-xs font-extrabold text-amber-900">Purata Bintang:</span>
+                        <span id="averageRatingText" class="font-cartoon text-base sm:text-lg text-amber-600">0.0 / 5 ⭐</span>
+                    </div>
+                    <div>
+                        <select id="filterStarSelect" class="w-full h-full px-3 py-2 rounded-xl border-2 border-amber-900/30 text-sm font-bold bg-white text-amber-950">
+                            <option value="ALL">Semua Penilaian Bintang</option>
+                            <option value="5">⭐⭐⭐⭐⭐ (5 / 5 Bintang)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 / 5 Bintang)</option>
+                            <option value="3">⭐⭐⭐ (3 / 5 Bintang)</option>
+                            <option value="2">⭐⭐ (2 / 5 Bintang)</option>
+                            <option value="1">⭐ (1 / 5 Bintang)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" id="filterSearchInput" placeholder="Cari nama atau ulasan..." class="w-full h-full px-3 py-2 rounded-xl border-2 border-amber-900/30 text-sm font-bold bg-white text-amber-950 placeholder-amber-900/40">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senarai Kad Maklum Balas -->
+            <div id="feedbackListContainer" class="space-y-4">
+                <!-- Rekod dipaparkan di sini secara dinamik -->
+            </div>
+
+            <!-- Keadaan Kosong -->
+            <div id="emptyFeedbackState" class="hidden dorayaki-card p-10 text-center bg-white">
+                <span class="text-5xl block mb-2">🍽️</span>
+                <h3 class="font-cartoon text-xl text-amber-950">Belum Ada Maklum Balas Diterima</h3>
+                <p class="text-sm font-bold text-amber-800 mt-1">
+                    Apabila pengunjung atau murid menghantar maklum balas mereka, semua nama, rating bintang, ulasan dan cadangan akan tersusun di sini.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODAL PENGESAHAN PADAM REKOD (MENGGANTIKAN CONFIRM) -->
+    <div id="deleteConfirmModal" class="hidden fixed inset-0 z-50 bg-amber-950/75 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="dorayaki-card max-w-md w-full p-6 text-center bg-white">
+            <span class="text-4xl block mb-2">🗑️</span>
+            <h3 class="font-cartoon text-xl text-amber-950 mb-1">Padam Maklum Balas Ini?</h3>
+            <p id="deleteTargetText" class="text-sm font-bold text-amber-800 mb-5">Rekod yang dipadam tidak boleh dikembalikan.</p>
+            <div class="flex items-center justify-center gap-3">
+                <button id="cancelDeleteBtn" class="dorayaki-btn bg-slate-200 hover:bg-slate-300 text-amber-950 font-cartoon text-sm px-5 py-2 rounded-xl cursor-pointer">
+                    Batal
+                </button>
+                <button id="confirmDeleteBtn" class="dorayaki-btn bg-red-500 hover:bg-red-400 text-white font-cartoon text-sm px-5 py-2 rounded-xl cursor-pointer">
+                    Ya, Padam
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL HADIAH DORAYAKI ISTIMEWA SELEPAS SUBMIT -->
+    <div id="dorayakiGiftModal" class="hidden fixed inset-0 z-50 bg-amber-950/80 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="dorayaki-card gift-modal-pop max-w-md w-full p-6 sm:p-7 text-center bg-gradient-to-b from-amber-50 via-white to-yellow-100 relative overflow-hidden">
+            <!-- Lencana Komik Atas -->
+            <div class="inline-block bg-amber-400 text-amber-950 border-2 border-amber-950 px-3 py-0.5 rounded-full font-comic-sfx text-base tracking-wider mb-2 shadow-sm -rotate-2">
+                🎁 HADIAH DARI DORAEMON!
+            </div>
+
+            <h3 id="giftRecipientTitle" class="font-cartoon text-2xl sm:text-3xl text-amber-950 leading-tight mb-1">
+                Terima Kasih!
+            </h3>
+            <p id="giftSummarySubtitle" class="text-xs sm:text-sm font-extrabold text-amber-800 mb-4">
+                Maklum balas anda berjaya dihantar! Ini hadiah Dorayaki khas untuk anda:
+            </p>
+
+            <!-- Ilustrasi Besar Kuih Dorayaki Berkilat -->
+            <div class="w-44 h-36 mx-auto my-2 dorayaki-hero-anim flex items-center justify-center">
+                <svg viewBox="0 0 180 140" class="w-full h-full">
+                    <!-- Cahaya Sinaran di Belakang Dorayaki -->
+                    <circle cx="90" cy="72" r="56" fill="#fef08a" opacity="0.65"/>
+                    <!-- Lapisan Lempeng Bawah -->
+                    <ellipse cx="90" cy="94" rx="66" ry="26" fill="#92400e" stroke="#451a03" stroke-width="4"/>
+                    <!-- Inti Kacang Merah (Anko) Lazat -->
+                    <ellipse cx="90" cy="80" rx="62" ry="18" fill="#451a03"/>
+                    <path d="M32 80 Q60 92 90 84 Q120 92 148 80" fill="none" stroke="#7f1d1d" stroke-width="5" stroke-linecap="round"/>
+                    <!-- Lapisan Lempeng Atas Gebu -->
+                    <ellipse cx="90" cy="64" rx="66" ry="26" fill="#d97706" stroke="#451a03" stroke-width="4"/>
+                    <ellipse cx="90" cy="61" rx="60" ry="21" fill="#f59e0b"/>
+                    <!-- Kilauan Madu di Atas Dorayaki -->
+                    <ellipse cx="72" cy="54" rx="26" ry="7" transform="rotate(-8 72 54)" fill="#fef08a" opacity="0.65"/>
+                    <!-- Bintang Berkelip di Sekeliling -->
+                    <path d="M24 34 L27 42 L35 45 L27 48 L24 56 L21 48 L13 45 L21 42 Z" fill="#facc15" stroke="#451a03" stroke-width="2"/>
+                    <path d="M154 28 L157 36 L165 39 L157 42 L154 50 L151 42 L143 39 L151 36 Z" fill="#38bdf8" stroke="#451a03" stroke-width="2"/>
+                    <path d="M148 98 L150 104 L156 106 L150 108 L148 114 L146 108 L140 106 L146 104 Z" fill="#fb7185" stroke="#451a03" stroke-width="1.5"/>
+                </svg>
+            </div>
+
+            <div class="bg-amber-100/90 border-2 border-amber-900/30 rounded-2xl p-3 mb-5">
+                <p class="font-cartoon text-sm sm:text-base text-amber-950">
+                    “Nyum nyum! Dorayaki hangat penuh inti kacang merah manis khas buat kamu!” 🥞✨
+                </p>
+            </div>
+
+            <button id="claimDorayakiBtn" class="dorayaki-btn w-full bg-gradient-to-r from-sky-500 to-sky-400 hover:from-sky-400 hover:to-sky-300 text-white font-cartoon text-base sm:text-lg py-3 rounded-2xl cursor-pointer">
+                😋 Terima & Makan Dorayaki!
+            </button>
+        </div>
+    </div>
+
+    <!-- SKRIP PENYIMPANAN PANGKALAN DATA AWAN & LOGIK INTERAKTIF -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // =====================================================================
+        // PILIHAN PAUTAN GOOGLE APPS SCRIPT (UNTUK GOOGLE SITES / GOOGLE SHEETS)
+        // Tampal URL Web App Apps Script anda di sini jika ingin sambung terus:
+        // =====================================================================
+        const DEFAULT_GOOGLE_SCRIPT_URL = "";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        let firebaseConfig = null;
+        try {
+            if (typeof __firebase_config !== 'undefined' && __firebase_config) {
+                firebaseConfig = typeof __firebase_config === 'string'
+                    ? JSON.parse(__firebase_config)
+                    : __firebase_config;
+            }
+        } catch (e) {
+            firebaseConfig = null;
+        }
+
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let isCloudReady = false;
+        let allFeedbacks = [];
+        let pendingDeleteId = null;
+        let customScriptUrl = DEFAULT_GOOGLE_SCRIPT_URL;
+
+        // Elemen Notifikasi Toast
+        const statusToast = document.getElementById('statusToast');
+        const toastIcon = document.getElementById('toastIcon');
+        const toastTitle = document.getElementById('toastTitle');
+        const toastMessage = document.getElementById('toastMessage');
+        document.getElementById('closeToastBtn').addEventListener('click', () => {
+            statusToast.classList.add('hidden');
+        });
+
+        function showToast(type, title, message) {
+            statusToast.classList.remove('hidden', 'border-emerald-600', 'border-red-600', 'border-amber-600');
+            if (type === 'success') {
+                statusToast.classList.add('border-emerald-600');
+                toastIcon.textContent = '🥞';
+            } else if (type === 'error') {
+                statusToast.classList.add('border-red-600');
+                toastIcon.textContent = '⚠️';
+            } else {
+                statusToast.classList.add('border-amber-600');
+                toastIcon.textContent = '🔔';
+            }
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            statusToast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // =====================================================================
+        // KAWALAN PENILAIAN BINTANG INTERAKTIF (1 HINGGA 5 BINTANG)
+        // =====================================================================
+        const starDescriptions = {
+            1: "1 / 5 Bintang — Perlu Banyak Penambahbaikan 🥣",
+            2: "2 / 5 Bintang — Kurang Memuaskan 🍵",
+            3: "3 / 5 Bintang — Sederhana & Baik 🍙",
+            4: "4 / 5 Bintang — Sedap & Menarik! 🍰",
+            5: "5 / 5 Bintang — Sangat Lazat & Hebat! 🥞"
+        };
+
+        const starBtns = document.querySelectorAll('.star-btn');
+        const starRatingValue = document.getElementById('starRatingValue');
+        const starScoreLabel = document.getElementById('starScoreLabel');
+
+        function setStarRating(rating) {
+            starRatingValue.value = rating;
+            starScoreLabel.textContent = starDescriptions[rating] || `${rating} / 5 Bintang`;
+
+            starBtns.forEach(btn => {
+                const val = Number(btn.getAttribute('data-star'));
+                if (val <= rating) {
+                    btn.classList.add('active');
+                    btn.style.opacity = '1';
+                    btn.style.filter = 'drop-shadow(0 3px 0 #78350f)';
+                } else {
+                    btn.classList.remove('active');
+                    btn.style.opacity = '0.32';
+                    btn.style.filter = 'grayscale(100%)';
+                }
+            });
+        }
+
+        starBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const chosen = Number(btn.getAttribute('data-star'));
+                setStarRating(chosen);
+            });
+        });
+
+        // Tetapkan lalai 5 bintang semasa mula
+        setStarRating(5);
+
+        // =====================================================================
+        // PENUKARAN TAB: BORANG MAKLUM BALAS <-> REKOD ULASAN
+        // =====================================================================
+        const tabFeedbackFormBtn = document.getElementById('tabFeedbackFormBtn');
+        const tabAdminDataBtn = document.getElementById('tabAdminDataBtn');
+        const feedbackFormSection = document.getElementById('feedbackFormSection');
+        const adminDataSection = document.getElementById('adminDataSection');
+
+        tabFeedbackFormBtn.addEventListener('click', () => {
+            feedbackFormSection.classList.remove('hidden');
+            adminDataSection.classList.add('hidden');
+            tabFeedbackFormBtn.className = 'dorayaki-btn bg-sky-500 text-white font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5';
+            tabAdminDataBtn.className = 'bg-white hover:bg-amber-50 text-amber-950 border-2 border-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors';
+        });
+
+        tabAdminDataBtn.addEventListener('click', () => {
+            adminDataSection.classList.remove('hidden');
+            feedbackFormSection.classList.add('hidden');
+            tabAdminDataBtn.className = 'dorayaki-btn bg-amber-400 text-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5';
+            tabFeedbackFormBtn.className = 'bg-white hover:bg-amber-50 text-amber-950 border-2 border-amber-950 font-cartoon text-xs sm:text-sm px-4 py-2 rounded-xl cursor-pointer flex items-center gap-1.5 transition-colors';
+            renderFeedbackRecords();
+        });
+
+        // Kawalan Panel Tetapan Google Sheets
+        const sheetConfigPanel = document.getElementById('sheetConfigPanel');
+        const appsScriptUrlInput = document.getElementById('appsScriptUrlInput');
+        if (customScriptUrl) appsScriptUrlInput.value = customScriptUrl;
+
+        document.getElementById('openSheetConfigBtn').addEventListener('click', () => {
+            sheetConfigPanel.classList.toggle('hidden');
+        });
+        document.getElementById('closeSheetConfigBtn').addEventListener('click', () => {
+            sheetConfigPanel.classList.add('hidden');
+        });
+        document.getElementById('saveAppsScriptBtn').addEventListener('click', () => {
+            customScriptUrl = appsScriptUrlInput.value.trim();
+            sheetConfigPanel.classList.add('hidden');
+            showToast('success', 'Pautan Disimpan!', 'Semua maklum balas selepas ini akan turut dihantar terus ke Google Sheets anda.');
+        });
+
+        // =====================================================================
+        // INISIALISASI FIREBASE & SINKRONISASI PANGKALAN DATA AWAN
+        // =====================================================================
+        async function initFirebaseAndSync() {
+            if (!firebaseConfig || !firebaseConfig.apiKey) {
+                isCloudReady = false;
+                renderFeedbackRecords();
+                return;
+            }
+
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                    if (currentUser) {
+                        isCloudReady = true;
+                        listenToFeedbackSubmissions();
+                    }
+                });
+            } catch (err) {
+                console.warn("Mod awan tidak tersedia, bertukar ke mod sesi:", err);
+                isCloudReady = false;
+            }
+        }
+
+        function listenToFeedbackSubmissions() {
+            if (!db || !currentUser) return;
+            const feedbackRef = collection(db, 'artifacts', appId, 'public', 'data', 'maklum_balas_google_site');
+
+            onSnapshot(feedbackRef, (snapshot) => {
+                const fetched = [];
+                snapshot.forEach((docSnap) => {
+                    fetched.push({ id: docSnap.id, ...docSnap.data() });
+                });
+
+                // Susun mengikut masa penghantaran terkini di atas
+                fetched.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                allFeedbacks = fetched;
+
+                updateSummaryStats();
+                renderFeedbackRecords();
+            }, (error) => {
+                console.error("Ralat membaca maklum balas:", error);
+            });
+        }
+
+        function updateSummaryStats() {
+            document.getElementById('totalFeedbackBadge').textContent = allFeedbacks.length;
+            const avgEl = document.getElementById('averageRatingText');
+
+            if (allFeedbacks.length === 0) {
+                avgEl.textContent = '0.0 / 5 ⭐';
+                return;
+            }
+
+            const totalStars = allFeedbacks.reduce((acc, item) => acc + (Number(item.rating) || 0), 0);
+            const avg = (totalStars / allFeedbacks.length).toFixed(1);
+            avgEl.textContent = `${avg} / 5 ⭐ (${allFeedbacks.length})`;
+        }
+
+        // =====================================================================
+        // PENGHANTARAN BORANG MAKLUM BALAS
+        // =====================================================================
+        const feedbackForm = document.getElementById('feedbackForm');
+        const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
+
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('visitorName').value.trim();
+            const rating = Number(document.getElementById('starRatingValue').value) || 5;
+            const comment = document.getElementById('feedbackComment').value.trim();
+            const suggestion = document.getElementById('feedbackSuggestion').value.trim();
+
+            if (!name || !comment) {
+                showToast('error', 'Maklumat Tidak Lengkap', 'Sila masukkan nama anda dan ulasan sebelum menghantar.');
+                return;
+            }
+
+            submitFeedbackBtn.disabled = true;
+            submitFeedbackBtn.innerHTML = `<span>⏳ Sedang Menghantar...</span>`;
+
+            const feedbackPayload = {
+                name: name,
+                rating: rating,
+                comment: comment,
+                suggestion: suggestion || 'Tiada cadangan tambahan',
+                submittedAtText: new Date().toLocaleString('ms-MY', {
+                    day: '2-digit', month: '2-digit', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                }),
+                createdAt: Date.now()
+            };
+
+            try {
+                let savedAnywhere = false;
+
+                // 1. Simpan ke Firestore (Pangkalan Data Awan)
+                if (isCloudReady && db && currentUser) {
+                    const feedbackRef = collection(db, 'artifacts', appId, 'public', 'data', 'maklum_balas_google_site');
+                    await addDoc(feedbackRef, feedbackPayload);
+                    savedAnywhere = true;
+                }
+
+                // 2. Hantar ke Google Sheets jika guru telah tetapkan pautan Apps Script
+                if (customScriptUrl) {
+                    await fetch(customScriptUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(feedbackPayload)
+                    });
+                    savedAnywhere = true;
+                }
+
+                // 3. Mod sandaran sesi jika dibenam di luar tanpa konfigurasi pautan luar
+                if (!savedAnywhere) {
+                    allFeedbacks.unshift({
+                        id: 'session-' + Date.now(),
+                        ...feedbackPayload
+                    });
+                    updateSummaryStats();
+                    renderFeedbackRecords();
+                }
+
+                // Reset borang selepas berjaya
+                feedbackForm.reset();
+                setStarRating(5);
+
+                // Paparkan Modal Hadiah Dorayaki Istimewa
+                document.getElementById('giftRecipientTitle').textContent = `Terima Kasih, ${name}!`;
+                document.getElementById('giftSummarySubtitle').textContent = `Penilaian ${rating}/5 bintang anda telah direkodkan. Doraemon hadiahkan Dorayaki istimewa untuk anda!`;
+                document.getElementById('dorayakiGiftModal').classList.remove('hidden');
+            } catch (err) {
+                console.error("Ralat menghantar maklum balas:", err);
+                showToast('error', 'Penghantaran Gagal', 'Terdapat gangguan semasa menyimpan maklum balas. Sila cuba lagi.');
+            } finally {
+                submitFeedbackBtn.disabled = false;
+                submitFeedbackBtn.innerHTML = `<span>🥞 Hantar Maklum Balas!</span>`;
+            }
+        });
+
+        // Kawalan Butang Tutup Modal Hadiah Dorayaki
+        const dorayakiGiftModal = document.getElementById('dorayakiGiftModal');
+        document.getElementById('claimDorayakiBtn').addEventListener('click', () => {
+            dorayakiGiftModal.classList.add('hidden');
+            showToast(
+                'success',
+                'Nyum! Dorayaki Diterima! 🥞',
+                'Terima kasih kerana sudi berkongsi maklum balas dan cadangan anda.'
+            );
+        });
+        dorayakiGiftModal.addEventListener('click', (e) => {
+            if (e.target === dorayakiGiftModal) {
+                dorayakiGiftModal.classList.add('hidden');
+            }
+        });
+
+        // =====================================================================
+        // PAPARAN SENARAI MAKLUM BALAS, PENAPIS, PADAM & MUAT TURUN CSV
+        // =====================================================================
+        const filterStarSelect = document.getElementById('filterStarSelect');
+        const filterSearchInput = document.getElementById('filterSearchInput');
+        const feedbackListContainer = document.getElementById('feedbackListContainer');
+        const emptyFeedbackState = document.getElementById('emptyFeedbackState');
+
+        function renderFeedbackRecords() {
+            const starFilter = filterStarSelect.value;
+            const searchQuery = filterSearchInput.value.trim().toLowerCase();
+
+            const filtered = allFeedbacks.filter(item => {
+                const matchStar = starFilter === 'ALL' || String(item.rating) === starFilter;
+                const matchText = !searchQuery ||
+                    (item.name || '').toLowerCase().includes(searchQuery) ||
+                    (item.comment || '').toLowerCase().includes(searchQuery) ||
+                    (item.suggestion || '').toLowerCase().includes(searchQuery);
+                return matchStar && matchText;
+            });
+
+            feedbackListContainer.innerHTML = '';
+
+            if (filtered.length === 0) {
+                emptyFeedbackState.classList.remove('hidden');
+                return;
+            }
+            emptyFeedbackState.classList.add('hidden');
+
+            filtered.forEach((item, idx) => {
+                const starsVisual = '⭐'.repeat(item.rating || 0) + '☆'.repeat(Math.max(0, 5 - (item.rating || 0)));
+                const hasCustomSuggestion = item.suggestion && item.suggestion !== 'Tiada cadangan tambahan';
+
+                const card = document.createElement('div');
+                card.className = 'dorayaki-card p-4 sm:p-5 bg-white';
+
+                card.innerHTML = `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-3 border-b-2 border-amber-900/15">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="bg-amber-400 text-amber-950 border-2 border-amber-950 font-cartoon text-xs px-2.5 py-0.5 rounded-lg">#${idx + 1}</span>
+                            <h3 class="font-cartoon text-lg sm:text-xl text-amber-950">${escapeHtml(item.name)}</h3>
+                            <span class="bg-amber-100 text-amber-900 border border-amber-400 font-extrabold text-xs px-2.5 py-0.5 rounded-full">
+                                ${starsVisual} (${item.rating}/5)
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-amber-800">🕒 ${escapeHtml(item.submittedAtText || '-')}</span>
+                            <button data-delete-id="${item.id}" data-sender-name="${escapeHtml(item.name)}" class="delete-fb-btn dorayaki-btn bg-red-100 hover:bg-red-500 text-red-700 hover:text-white font-cartoon text-xs px-2.5 py-1.5 rounded-xl cursor-pointer" title="Padam Ulasan">
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                        <!-- Kotak Ulasan -->
+                        <div class="bg-amber-50 border-2 border-amber-900/20 rounded-xl p-3">
+                            <span class="block font-cartoon text-xs text-amber-900 uppercase mb-1">💬 Ulasan:</span>
+                            <p class="text-sm font-bold text-amber-950 leading-relaxed">${escapeHtml(item.comment)}</p>
+                        </div>
+
+                        <!-- Kotak Cadangan Penambahbaikan -->
+                        <div class="bg-sky-50 border-2 border-sky-900/20 rounded-xl p-3">
+                            <span class="block font-cartoon text-xs text-sky-900 uppercase mb-1">💡 Cadangan Penambahbaikan:</span>
+                            <p class="text-sm font-bold ${hasCustomSuggestion ? 'text-sky-950' : 'text-slate-500 italic'} leading-relaxed">
+                                ${escapeHtml(item.suggestion || 'Tiada cadangan tambahan')}
+                            </p>
+                        </div>
+                    </div>
+                `;
+
+                feedbackListContainer.appendChild(card);
+            });
+
+            // Pasang Event Listener Butang Padam
+            document.querySelectorAll('.delete-fb-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    pendingDeleteId = btn.getAttribute('data-delete-id');
+                    const sender = btn.getAttribute('data-sender-name');
+                    document.getElementById('deleteTargetText').textContent = `Adakah anda pasti mahu memadam maklum balas daripada "${sender}"?`;
+                    document.getElementById('deleteConfirmModal').classList.remove('hidden');
+                });
+            });
+        }
+
+        filterStarSelect.addEventListener('change', renderFeedbackRecords);
+        filterSearchInput.addEventListener('input', renderFeedbackRecords);
+
+        // Kawalan Modal Padam
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+            pendingDeleteId = null;
+            document.getElementById('deleteConfirmModal').classList.add('hidden');
+        });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+            if (!pendingDeleteId) return;
+            try {
+                if (isCloudReady && db && currentUser && !pendingDeleteId.startsWith('session-')) {
+                    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'maklum_balas_google_site', pendingDeleteId));
+                } else {
+                    allFeedbacks = allFeedbacks.filter(item => item.id !== pendingDeleteId);
+                    updateSummaryStats();
+                    renderFeedbackRecords();
+                }
+                showToast('success', 'Rekod Dipadam', 'Maklum balas tersebut telah berjaya dipadam.');
+            } catch (err) {
+                showToast('error', 'Gagal Memadam', 'Tidak dapat memadam rekod buat masa ini.');
+            } finally {
+                pendingDeleteId = null;
+                document.getElementById('deleteConfirmModal').classList.add('hidden');
+            }
+        });
+
+        // Eksport ke Fail CSV / Excel
+        document.getElementById('exportCsvBtn').addEventListener('click', () => {
+            if (allFeedbacks.length === 0) {
+                showToast('error', 'Tiada Data Untuk Dimuat Turun', 'Belum ada maklum balas untuk dieksport ke fail CSV.');
+                return;
+            }
+
+            const headers = ['Bil', 'Nama', 'Penilaian Bintang (Per 5)', 'Ulasan', 'Cadangan Penambahbaikan', 'Masa Penghantaran'];
+            const rows = allFeedbacks.map((item, idx) => [
+                idx + 1,
+                `"${(item.name || '').replace(/"/g, '""')}"`,
+                `${item.rating || 0} / 5`,
+                `"${(item.comment || '').replace(/"/g, '""')}"`,
+                `"${(item.suggestion || '').replace(/"/g, '""')}"`,
+                `"${item.submittedAtText || ''}"`
+            ]);
+
+            const csvContent = "\uFEFF" + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Rekod_Maklum_Balas_Google_Site.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            showToast('success', 'Fail CSV Dimuat Turun!', 'Rekod maklum balas berjaya dimuat turun dan boleh dibuka dengan Excel / Google Sheets.');
+        });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Mulakan pangkalan data apabila halaman dimuatkan
+        window.addEventListener('DOMContentLoaded', () => {
+            initFirebaseAndSync();
+        });
+    </script>
+</body>
+</html>
